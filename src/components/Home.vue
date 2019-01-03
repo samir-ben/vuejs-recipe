@@ -44,9 +44,12 @@ export default {
   },
   methods: {
       deleteRecipe(id){
-          this.recipes = this.recipes.filter(recipe =>{
+          db.collection('recipes').doc(id).delete()
+          .then(()=>{
+              this.recipes = this.recipes.filter(recipe =>{
               return recipe.id !== id
-          })
+            })
+          }) 
       }
   },
   created() {
