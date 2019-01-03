@@ -6,9 +6,10 @@
         <label for="title">Titre</label>
         <input name="title" type="text" v-model="title">
       </div>
-      <div class="field" v-for="(ing, index) in ingredients" :key="index">
+      <div class="field" v-for="(ing, index) in ingredients" :key="index"> 
         <label for="ingredients">Ingrédient</label>
         <input name="ingredients" type="text" v-model="ingredients[index]">
+        <i class="trash icon" @click="deleteIng(ing)"></i> 
       </div>
       <div class="field">
         <label for="ingredient">Ajouter un ingrédient</label>
@@ -67,10 +68,28 @@ export default {
       } else {
         this.feedback = "Veuillez ajouter un ingrédient";
       }
+    },
+    deleteIng(ing) {
+        this.ingredients = this.ingredients.filter(ingredient => {
+            return ingredient !== ing;
+        })
     }
   }
 };
 </script>
 
 <style scoped>
+.field{
+    position: relative;
+}
+.trash{
+    position: absolute;
+    top: 32px;
+    right: 5px;
+    color: rgb(136, 136, 136);
+    cursor: pointer;
+}
+.trash:hover{
+    color: rgb(23, 23, 23);
+}
 </style>
