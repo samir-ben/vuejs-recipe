@@ -33,42 +33,13 @@
 
 
 <script>
+import db from '@/firebase/init'
+
 export default {
   name: "Navbar",
   data() {
     return {
-      recipes: [
-        {
-          title: "Recette 1",
-          slug: "recette-1",
-          ingredients: ["bananes", "café", "sucre"],
-          id: 1
-        },
-        {
-          title: "Recette 2",
-          slug: "recette-2",
-          ingredients: ["fraises", "cacao", "vanille"],
-          id: 2
-        },
-        {
-          title: "Recette 3",
-          slug: "recette-3",
-          ingredients: ["bananes", "café", "sucre"],
-          id: 3
-        },
-        {
-          title: "Recette 4",
-          slug: "recette-4",
-          ingredients: ["bananes", "café", "sucre"],
-          id: 4
-        },
-        {
-          title: "Recette 5",
-          slug: "recette-5",
-          ingredients: ["bananes", "café", "sucre"],
-          id: 5
-        }
-      ]
+      recipes: []
     };
   },
   methods: {
@@ -77,6 +48,16 @@ export default {
               return recipe.id !== id
           })
       }
+  },
+  created() {
+      db.collection('recipes').get()
+      .then(snapshot =>{
+          snapshot.forEach(doc => {
+              let recipe = doc.data();
+              recipe.id = doc.id;
+              this.recipes.push(recipe);
+          });
+      })
   },
 };
 </script>
