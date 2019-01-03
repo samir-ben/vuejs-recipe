@@ -23,6 +23,9 @@
 </template>
 
 <script>
+import db from '@/firebase/init'
+import slugify from 'slugify'
+
 export default {
   name: "AddRecipe",
   data() {
@@ -30,12 +33,32 @@ export default {
       title: null,
       another: null,
       ingredients: [],
-      feedback: null
+      feedback: null,
+      slug: null
     };
   },
   methods: {
     AddRecipe() {
-      console.log(this.title, this.ingredients);
+      if(this.title){
+          this.feedback= null;
+          this.slug = slugify(this.title, {
+            replacement: '-',
+            remove: /[$*_+~.()'"!\-:@]/g,
+            lower: true
+            })
+            console.log(this.slug)
+          db.collection('recipes').add({
+              title: this.title,
+              ingredients: this.ingredients,
+              slug: this.slug
+      }).then(()=>{
+          this.$router.push({ name: 'Home'});
+      }).catch(err =>{
+          console.log(err);
+      })
+      }else{
+          this.feedback = "Veuillez indiquer un titre pour la recette";
+      }
     },
     addIng() {
       if (this.another) {
