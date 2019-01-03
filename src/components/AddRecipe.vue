@@ -46,7 +46,6 @@ export default {
             remove: /[$*_+~.()'"!\-:@]/g,
             lower: true
             })
-            console.log(this.slug)
           db.collection('recipes').add({
               title: this.title,
               ingredients: this.ingredients,
