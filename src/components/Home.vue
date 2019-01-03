@@ -23,6 +23,11 @@
                   </div>
                 </div>
               </div>
+              <div class="extra content">
+                <span class="ui button right floated">
+                  <router-link :to="{ name: 'EditRecipe', params: { id: recipe.id } }">Modifier</router-link>
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -33,7 +38,7 @@
 
 
 <script>
-import db from '@/firebase/init'
+import db from "@/firebase/init";
 
 export default {
   name: "Navbar",
@@ -43,25 +48,28 @@ export default {
     };
   },
   methods: {
-      deleteRecipe(id){
-          db.collection('recipes').doc(id).delete()
-          .then(()=>{
-              this.recipes = this.recipes.filter(recipe =>{
-              return recipe.id !== id
-            })
-          }) 
-      }
+    deleteRecipe(id) {
+      db.collection("recipes")
+        .doc(id)
+        .delete()
+        .then(() => {
+          this.recipes = this.recipes.filter(recipe => {
+            return recipe.id !== id;
+          });
+        });
+    }
   },
   created() {
-      db.collection('recipes').get()
-      .then(snapshot =>{
-          snapshot.forEach(doc => {
-              let recipe = doc.data();
-              recipe.id = doc.id;
-              this.recipes.push(recipe);
-          });
-      })
-  },
+    db.collection("recipes")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let recipe = doc.data();
+          recipe.id = doc.id;
+          this.recipes.push(recipe);
+        });
+      });
+  }
 };
 </script>
 
@@ -71,11 +79,11 @@ export default {
 .card {
   margin: -5px -5px;
 }
-.trash{
-    color: rgb(136, 136, 136);
-    cursor: pointer;
+.trash {
+  color: rgb(136, 136, 136);
+  cursor: pointer;
 }
-.trash:hover{
-    color: rgb(23, 23, 23);
+.trash:hover {
+  color: rgb(23, 23, 23);
 }
 </style>
