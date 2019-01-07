@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="ui container">
-      <h1>Home</h1>
+      <h1>Mes recettes</h1>
       <div class="ui grid">
         <div class="sixteen wide column">
           <div class="ui four stackable cards">
@@ -76,6 +76,9 @@ export default {
 
 
 <style scoped>
+h1 {
+  margin: 30px auto;
+}
 .card {
   margin: -5px -5px;
 }
