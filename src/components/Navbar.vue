@@ -1,7 +1,7 @@
 <template>
     <nav class="ui container">
         <div class="ui container top attached tabular mini menu">
-                <router-link :to="{ name: 'Home'}" class="active item">Home</router-link>
+                <router-link :to="{ name: 'Home'}" class="active item">Accueil</router-link>
             <div class="right menu">
                 <div class="item">
                     <div class="ui icon compact mini menu">
@@ -30,7 +30,9 @@ export default {
 
 
 <style scoped>
-
+nav {
+    margin-top: 20px;
+}
 </style>
 
 
